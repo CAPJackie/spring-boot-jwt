@@ -1,7 +1,4 @@
 ## Spring Boot Security with JWT
-
-Secure your REST API using Spring Security with JWT.
-
 **Learning Objectives**
 
 - Explain how JWT works.
@@ -10,7 +7,7 @@ Secure your REST API using Spring Security with JWT.
 
 ## Problem Solving 🤹🏽
 
-Our API Endpoints can be used by anyone that knows the URL and API structure. In order to secure our API we are going to implement JWT authentication. But let's practice our problem solving skills first with the [Bridge Riddle](https://ed.ted.com/lessons/can-you-solve-the-bridge-riddle-alex-gendler#watch) 
+Our API Endpoints can be used by anyone that knows the URL and API structure. In order to secure our API we are going to implement JWT authentication.
 
 **Main Topics**
 
@@ -31,11 +28,6 @@ Our API Endpoints can be used by anyone that knows the URL and API structure. In
      implementation 'org.springframework.boot:spring-boot-starter-security'
      implementation 'org.springframework.security:spring-security-crypto'
      implementation 'io.jsonwebtoken:jjwt:0.9.1'
-   ```
-2. The following dependencies are optional but helpful if your project isn't recognizing javax features: 
- ```groovy
-	 implementation 'javax.ws.rs:javax.ws.rs-api'  
-	 implementation 'javax.xml.bind:jaxb-api'
    ```
 4. Create a new class inside the *config* package called *SecurityConfiguration* where you will define the secure and open endpoints and the session management policy:
 
@@ -142,12 +134,10 @@ Our API Endpoints can be used by anyone that knows the URL and API structure. In
 	```java
 	this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt());
 	```
-9. Also update your *update* function which previously should have been implemented to update a *User* based on a *UserDto* ( If you didn't implement it in this way just refactor your code to match this ):
+9. Also update your *update* function which previously should have been implemented to update a *User* based on a *UserDto*:
 	```java
-	public void update(UserDto user) {
-		this.name = user.getName();
-		this.email = user.getEmail();
-		this.lastName = user.getLastName();
+	public void toEntity(UserDto user) {
+		//Previous labs implementation
 		if (user.getPassword() != null) {
 			this.passwordHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		}
